@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XCO Sector Analyzer – MVP</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="garmin-fitsdk.bundle.js"></script>
+<script src="app.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo">XCO</span>
+    <span class="title">Sector Analyzer</span>
+  </div>
+  <div class="toolbar">
+    <label for="fileInput" class="btn-file">📁 Import FIT</label>
+    <input type="file" id="fileInput" accept=".fit" style="display:none">
+    <button id="btnReset" class="btn-ghost">Återställ</button>
+  </div>
+</header>
+
+<main>
+  <section id="uploadArea" class="panel upload">
+    <div class="dropzone" id="dropzone">
+      <div class="dz-icon">📥</div>
+      <h2>Släpp din FIT-fil här</h2>
+      <p>eller klicka för att bläddra bland filer</p>
+      <input type="file" id="fileInput2" accept=".fit" style="display:none">
+    </div>
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <span>Analyserar FIT-filen...</span>
+    </div>
+  </section>
+
+  <section id="analysisArea" class="hidden">
+    <div class="meta-bar" id="metaBar"></div>
+
+    <div class="panel map-panel">
+      <div class="panel-header">
+        <h3>🗺️ Bana & Sektorer</h3>
+        <div class="hint">Klicka på banan för att lägga en brytpunkt. Klicka på en brytpunkt för att radera den.</div>
+      </div>
+      <div id="map"></div>
+      <div class="sector-names" id="sectorNames"></div>
+    </div>
+
+    <div class="panel elev-panel">
+      <div class="panel-header">
+        <h3>📈 Höjdprofil</h3>
+        <div class="hint">Sektorerna speglas här – klicka även här för att placera brytpunkter.</div>
+      </div>
+      <canvas id="elevCanvas"></canvas>
+    </div>
+
+    <div class="panel table-panel">
+      <div class="panel-header">
+        <h3>📊 Sektoranalys – Varv för varv</h3>
+        <div class="hint">Alla tider i format mm:ss. Effekt i W. Puls i bpm. Klicka i kolumnrubrik för sortering.</div>
+      </div>
+      <div class="table-scroll">
+        <table id="resultTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>XCO Sector Analyzer · All data stannar i din webbläsare</span>
+</footer>
+
+</body>
+</html>
